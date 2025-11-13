@@ -6,7 +6,7 @@ import pandas as pd
 class PlaylistFunctions:
     @staticmethod
     def Generate(mood: str = "Happy"):
-        df = pd.read_csv(filepath_or_buffer="../Data/songs.csv", delimiter="\t")
+        df = pd.read_csv(filepath_or_buffer="../data/songs.csv", delimiter="\t")
         result = df[df["Mood"] == mood]
         songs: List[Song] = []
 
