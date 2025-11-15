@@ -20,10 +20,10 @@ class HistoryFunctions:
 
     @staticmethod
     def Increment(history: History, category: Literal["Skipped", "Finished"], song: Song):
-        songId = SongFunctions.GetSongId(song)
-        if not songId in history[category]:
-            history[category][songId] = 0
-        history[category][songId] += 1
+        song_id = SongFunctions.GetSongId(song)
+        if not song_id in history[category]:
+            history[category][song_id] = 0
+        history[category][song_id] += 1
 
     @staticmethod
     def Create():

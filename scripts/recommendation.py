@@ -8,25 +8,25 @@ class RecommendationFunctions:
     @staticmethod
     def GetSongChance(history: History, song: Song):
         chance = 0.50
-        songId = SongFunctions.GetSongId(song)
+        song_id = SongFunctions.GetSongId(song)
 
-        if songId in history["Disliked"]:
+        if song_id in history["Disliked"]:
             chance = 0.10
         else:
-            if songId in history["Previous"]:
+            if song_id in history["Previous"]:
                 chance -= 0.20
 
-            if songId in history["Liked"]:
+            if song_id in history["Liked"]:
                 chance += 0.10
 
-            if songId in history["Favorite"]:
+            if song_id in history["Favorite"]:
                 chance += 0.20
 
-            if songId in history["Skipped"] and songId in history["Finished"]:
-                finishedCount = history["Finished"][songId]
-                skippedCount = history["Skipped"][songId]
-                percentFinished = finishedCount / (finishedCount + skippedCount)
-                chance += (0.10 * percentFinished)
+            if song_id in history["Skipped"] and song_id in history["Finished"]:
+                finished_count = history["Finished"][song_id]
+                skipped_count = history["Skipped"][song_id]
+                percent_finished = finished_count / (finished_count + skipped_count)
+                chance += (0.10 * percent_finished)
 
         chance = max(0.00, min(chance, 1.00))
 
@@ -34,15 +34,15 @@ class RecommendationFunctions:
 
     @staticmethod
     def GetSongChances(history: History, songs: List[Song]):
-        songChances: WeightedKeys = {
+        song_chances: WeightedKeys = {
             "Keys": [],
             "Chances": [],
         }
 
         for song in songs:
             chance = RecommendationFunctions.GetSongChance(history, song)
-            songChances["Keys"].append(song)
-            songChances["Chances"].append(chance)
-        songChances["Chances"] = ChoiceFunctions.Normalize(songChances["Chances"])
+            song_chances["Keys"].append(song)
+            song_chances["Chances"].append(chance)
+        song_chances["Chances"] = ChoiceFunctions.Normalize(song_chances["Chances"])
 
-        return songChances
+        return song_chances

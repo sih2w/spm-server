@@ -6,9 +6,9 @@ import random
 class UserFunctions:
     @staticmethod
     def GetActionChances() -> WeightedKeys:
-        actionChances: WeightedKeys = {
+        action_chances: WeightedKeys = {
             "Keys": ["Skip", "Like", "Dislike", "Favorite"],
             "Chances": [random.random(), random.random(), random.random(), random.random()],
         }
-        actionChances["Chances"] = ChoiceFunctions.Normalize(actionChances["Chances"])
-        return actionChances
+        action_chances["Chances"] = ChoiceFunctions.Normalize(action_chances["Chances"])
+        return action_chances

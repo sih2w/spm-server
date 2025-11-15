@@ -17,21 +17,21 @@ class TestFunctions:
         print("")
 
     @staticmethod
-    def OutputCurrentSongChances(songChances: WeightedKeys):
+    def OutputCurrentSongChances(song_chances: WeightedKeys):
         print("")
-        for index in range(len(songChances["Keys"])):
-            key = songChances["Keys"][index]
-            chance = songChances["Chances"][index]
+        for index in range(len(song_chances["Keys"])):
+            key = song_chances["Keys"][index]
+            chance = song_chances["Chances"][index]
             print(f"{SongFunctions.GetSongId(key)}: {f"%.2f" % chance}")
         print("")
 
     @staticmethod
     def Step(history: History, songs: List[Song], generator: Generator):
-        songChances = RecommendationFunctions.GetSongChances(history, songs)
-        actionChances = UserFunctions.GetActionChances()
+        song_chances = RecommendationFunctions.GetSongChances(history, songs)
+        action_chances = UserFunctions.GetActionChances()
 
-        song = ChoiceFunctions.GetKey(songChances, generator)
-        action = ChoiceFunctions.GetKey(actionChances, generator)
+        song = ChoiceFunctions.GetKey(song_chances, generator)
+        action = ChoiceFunctions.GetKey(action_chances, generator)
 
         HistoryFunctions.UpdatePrevious(history, song)
 
