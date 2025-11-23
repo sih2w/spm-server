@@ -6,9 +6,11 @@ from services.historyservice import HistoryService, History
 from services.spotifyservice import SpotifyService
 from services.recommendationservice import RecommendationService
 from numpy.random import Generator, PCG64
+from quart_cors import cors
 
 
 app = Quart(__name__)
+app = cors(app, allow_origin="*")
 
 
 def verify_request(func):
